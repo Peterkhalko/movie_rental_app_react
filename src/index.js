@@ -10,18 +10,20 @@ import Movie from "./components/Movie";
 import Register from "./components/Register";
 import Rental from "./components/Rental";
 import reportWebVitals from "./reportWebVitals";
+import Landing from "./Landing";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router>
     <Routes>
-      <Route path="/" element={<App />}>
-        <Route path="movie" element={<Movie />} />
-        <Route path="genre" element={<Genre />} />
-        <Route path="rental" element={<Rental />} />
-        <Route path="customer" element={<Customer />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
+      <Route path="/" element={<Landing />}></Route>
+      <Route path="/app" element={<App />}>
+        <Route path="/app/movie" element={<Movie />} />
+        <Route path="/app/genre" element={<Genre />} />
+        <Route path="/app/rental" element={<Rental />} />
+        <Route path="/app/customer" element={<Customer />} />
+        <Route path="/app/login" element={<Login />} />
+        <Route path="/app/register" element={<Register />} />
       </Route>
     </Routes>
   </Router>

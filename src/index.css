@@ -26,3 +26,16 @@
 .b2 {
   border: 1px solid black;
 }
+
+.landing-hero {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.col1 {
+  background-image: url("../src/images/underworld.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}

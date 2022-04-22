@@ -42,7 +42,7 @@ function Movie() {
                   </svg>
                 )}
               </td>
-              {console.log(m.liked)}
+
               <button
                 className="inline-block px-6 py-2.5 bg-gradient-to-r  hover:from-pink-500 hover:to-yellow-500  bg-red-600
                text-white  rounded-full "

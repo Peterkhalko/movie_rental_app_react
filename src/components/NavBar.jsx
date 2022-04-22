@@ -8,14 +8,14 @@ function NavBar() {
           <span className=" pr-1">
             <VideoCameraIcon className="h-8 w-8"></VideoCameraIcon>
           </span>
-          <span style={{ "font-family": "Niconne", "font-size": "40px" }}>
+          <span style={{ "font-family": "Niconne", "font-size ": "40px" }}>
             {" "}
-            Movie Rental
+            <a href="/">Movie Rental</a>
           </span>
         </span>
         <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
           <NavLink
-            to="movie"
+            to="/app/movie"
             className="text-zinc-100 text-lg hover:text-cyan-400"
             style={({ isActive }) => {
               return {
@@ -26,7 +26,7 @@ function NavBar() {
             Movies
           </NavLink>
           <NavLink
-            to="genre"
+            to="/app/genre"
             className="text-zinc-100 text-lg hover:text-cyan-400"
             style={({ isActive }) => {
               return {
@@ -37,7 +37,7 @@ function NavBar() {
             Genre
           </NavLink>
           <NavLink
-            to="rental"
+            to="/app/rental"
             className="text-zinc-100 text-lg hover:text-cyan-400"
             style={({ isActive }) => {
               return {
@@ -48,7 +48,7 @@ function NavBar() {
             Rentals
           </NavLink>
           <NavLink
-            to="Customer"
+            to="/app/Customer"
             className="text-zinc-100 text-lg hover:text-cyan-400"
             style={({ isActive }) => {
               return {
@@ -59,7 +59,7 @@ function NavBar() {
             Customer
           </NavLink>
           <NavLink
-            to="login"
+            to="/app/login"
             className="text-zinc-100 text-lg hover:text-cyan-400"
             style={({ isActive }) => {
               return {
@@ -70,7 +70,7 @@ function NavBar() {
             Login
           </NavLink>
           <NavLink
-            to="register"
+            to="/app/register"
             className="text-zinc-100 text-lg hover:text-cyan-400"
             style={({ isActive }) => {
               return {
