@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 function Footer() {
   return (
-    <footer class="bg-slate-800  p-2  footer">
+    <footer class="bg-slate-800  p-2  footer text-center">
       <span class="text-sm text-white sm:text-center">
         © 2022{" "}
         <a href="www.movierental.com" class="hover:underline">

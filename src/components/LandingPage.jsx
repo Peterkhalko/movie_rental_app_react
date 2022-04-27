@@ -11,7 +11,7 @@ function LandingPage() {
       </video>
       <div class="rounded-lg  text-center  landing-hero">
         <h2 class="text-3xl leading-9 font-bold tracking-tight text-white sm:text-4xl sm:leading-10">
-          Welcome to Movi Rental
+          Welcome to Movie Rental
         </h2>
         <div class="mt-8 flex justify-center">
           <div class="inline-flex rounded-md bg-blue-500 shadow">

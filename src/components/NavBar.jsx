@@ -48,7 +48,7 @@ function NavBar() {
             Rentals
           </NavLink>
           <NavLink
-            to="/app/Customer"
+            to="/app/customer"
             className="text-zinc-100 text-lg hover:text-cyan-400"
             style={({ isActive }) => {
               return {
