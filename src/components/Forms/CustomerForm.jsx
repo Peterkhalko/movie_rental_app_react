@@ -1,8 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
+import { useDispatch, useSelector } from "react-redux";
+import { nanoid } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
+import {
+  createCustomer,
+  updateCustomer,
+} from "../../resources/customer/customerSlice";
+import { useParams } from "react-router-dom";
 const schema = yup.object().shape({
   name: yup.string().min(3).max(10).required(),
   phone: yup.string().min(10).max(10).required(),
@@ -10,29 +17,49 @@ const schema = yup.object().shape({
 });
 
 const CustomerForm = () => {
+  const customers = useSelector((state) => state.customerReducer.customers);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm({
     resolver: yupResolver(schema),
   });
+  const params = useParams();
+  useEffect(() => {
+    const customerId = params.customerId;
+    if (!customerId) return;
+    const customer = customers.find((c) => c._id === params.customerId);
+    if (!customer) return;
+    setValue("name", customer.name);
+    setValue("_id", customer._id);
+    setValue("phone", customer.phone);
+    setValue("isGold", customer.isGold);
+  }, []);
 
   const onSubmitHandler = (data) => {
-    console.log({ data });
-    reset();
+    if (!data._id) {
+      dispatch(createCustomer(data));
+    } else {
+      dispatch(updateCustomer(data));
+    }
+    navigate("/app/customer");
   };
+
   return (
-    <div className="register-container flex justify-center m-2">
-      <div class="block p-6 rounded-lg   shadow-lg bg-white max-w-md ">
-        <span className="header-font p-8 mb-8">Add Customers</span>
+    <div className="register-container flex justify-center m-10">
+      <div className="block p-6 rounded-lg   shadow-lg bg-white max-w-md ">
+        <span className="flex justify-center">Add Customers</span>
 
         <form className="m-8" onSubmit={handleSubmit(onSubmitHandler)}>
-          <div class="form-group mb-6">
+          <div className="form-group mb-6">
             <input
               type="text"
-              class="form-control block
+              className="form-control block
         w-full
         px-3
         py-1.5
@@ -52,10 +79,10 @@ const CustomerForm = () => {
             />
             <p className="text-red-900">{errors.name?.message}</p>
           </div>
-          <div class="form-group mb-6">
+          <div className="form-group mb-6">
             <input
               type="text"
-              class="form-control block
+              className="form-control block
         w-full
         px-3
         py-1.5
@@ -75,17 +102,17 @@ const CustomerForm = () => {
             />
             <p className="text-red-900">{errors.phone?.message}</p>
           </div>
-          <div class="form-group mb-6">
-            <div class="form-group form-check  mb-6">
+          <div className="form-group mb-6">
+            <div className="form-group form-check  mb-6">
               <input
                 type="checkbox"
-                class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain mr-2 cursor-pointer"
+                className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain mr-2 cursor-pointer"
                 id="isGold"
                 {...register("isGold")}
               />
               <label
-                class="form-check-label inline-block text-gray-800"
-                for="isGold"
+                className="form-check-label inline-block text-gray-800"
+                htmlFor="isGold"
               >
                 is Gold member
               </label>
@@ -94,7 +121,7 @@ const CustomerForm = () => {
           </div>
 
           <button
-            class="
+            className="
       w-full
       px-6
       py-2.5

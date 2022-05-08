@@ -1,18 +1,26 @@
-import React, { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useParams } from "react-router-dom";
-import { getGenre } from "../../services/fakeGenreService";
+import { retrieveGenres } from "../../resources/genre/genreSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { createMovie } from "../../resources/movie/movieSlice";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
   title: yup.string().min(3).max(10).required(),
-  genre: yup.string().min(2).max(24).required(),
-  numberInStock: yup.number().required(),
+  genreId: yup.string().min(2).max(24).required(),
+  numberInStocks: yup.number().required(),
   dailyRentalRate: yup.number().required(),
 });
 
 const MovieForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  useEffect(() => {
+    dispatch(retrieveGenres());
+  }, []);
+  const genres = useSelector((state) => state.genreReducer.genres);
   const {
     register,
     handleSubmit,
@@ -23,19 +31,23 @@ const MovieForm = () => {
   });
 
   const onSubmitHandler = (data) => {
-    console.log({ data });
-    reset();
+    if (data.genreId == "genre") {
+      alert("Please select valid genre");
+    } else {
+      dispatch(createMovie(data));
+      navigate("/app/movie");
+    }
   };
   return (
-    <div className="register-container flex justify-center m-2">
-      <div class="block p-6 rounded-lg   shadow-lg bg-white max-w-md ">
-        <span className="header-font p-8 mb-8">Add movie</span>
+    <div className="register-container flex justify-center m-10">
+      <div className="block p-6 rounded-lg   shadow-lg bg-white max-w-md ">
+        <span className=" flex justify-center">Add movie</span>
 
         <form className="m-8" onSubmit={handleSubmit(onSubmitHandler)}>
-          <div class="form-group mb-6">
+          <div className="form-group mb-6">
             <input
               type="text"
-              class="form-control block
+              className="form-control block
         w-full
         px-3
         py-1.5
@@ -55,10 +67,11 @@ const MovieForm = () => {
             />
             <p className="text-red-900">{errors.title?.message}</p>
           </div>
-          <div class="form-group mb-6">
-            <input
+          <div className="form-group mb-6">
+            <select
+              defaultValue={"genre"}
               type="text"
-              class="form-control block
+              className="form-control block
         w-full
         px-3
         py-1.5
@@ -72,16 +85,26 @@ const MovieForm = () => {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              id="genre"
-              placeholder="Enter Genre Id"
-              {...register("genre")}
-            />
-            <p className="text-red-900">{errors.genre?.message}</p>
+              id="genreId"
+              placeholder="Enter GenreId"
+              {...register("genreId")}
+            >
+              <option value="genre" disabled>
+                Select Genre
+              </option>
+              {genres.map((g) => (
+                <option key={g._id} value={g._id}>
+                  {g.name}
+                </option>
+              ))}
+            </select>
+            <p className="text-red-900">{errors.title?.message}</p>
           </div>
-          <div class="form-group mb-6">
+
+          <div className="form-group mb-6">
             <input
               type="number"
-              class="form-control block
+              className="form-control block
         w-full
         px-3
         py-1.5
@@ -95,16 +118,16 @@ const MovieForm = () => {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              id="numberInStock"
+              id="numberInStocks"
               placeholder="Enter number in stock"
-              {...register("numberInStock")}
+              {...register("numberInStocks")}
             />
             <p className="text-red-900">{errors.numberInStock?.message}</p>
           </div>
-          <div class="form-group mb-6">
+          <div className="form-group mb-6">
             <input
               type="number"
-              class="form-control block
+              className="form-control block
         w-full
         px-3
         py-1.5
@@ -126,7 +149,7 @@ const MovieForm = () => {
           </div>
 
           <button
-            class="
+            className="
       w-full
       px-6
       py-2.5

@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useParams } from "react-router-dom";
-import { getGenre } from "../../services/fakeGenreService";
 import { useSelector, useDispatch } from "react-redux";
-import { addGenre } from "../../resources/genre/genreSlice";
+import { useNavigate } from "react-router-dom";
+import { createGenre, updateGenre } from "../../resources/genre/genreSlice";
 
 const schema = yup.object().shape({
   name: yup.string().min(3).max(10).required(),
 });
 const GenreForm = () => {
+  const navigate = useNavigate();
   const genres = useSelector((state) => state.genreReducer.genres);
   const dispatch = useDispatch();
   const {
@@ -25,29 +26,34 @@ const GenreForm = () => {
   const params = useParams();
 
   useEffect(() => {
-    console.log(params.genreId);
     const genreId = params.genreId;
     if (!genreId) return;
-    const genre = getGenre(genreId);
+    const genre = genres.find((g) => g._id === params.genreId);
     if (!genre) return;
-    setValue("name", genre[0].name);
-    setValue("_id", genre[0]._id);
+    setValue("name", genre.name);
+    setValue("_id", genre._id);
   }, []);
 
   const onSubmitHandler = (data) => {
-    dispatch(addGenre(data));
+    if (data._id) {
+      dispatch(updateGenre(data));
+      navigate("/app/genre");
+    } else {
+      dispatch(createGenre(data));
+      navigate("/app/genre");
+    }
     reset();
   };
   return (
-    <div className="register-container flex justify-center m-2">
-      <div class="block p-6 rounded-lg   shadow-lg bg-white max-w-md ">
-        <span className="header-font p-8 mb-8">Genre</span>
+    <div className="register-container flex justify-center mt-10">
+      <div className="block p-6 rounded-lg shadow-lg bg-white max-w-md  ">
+        <span className="justify-center flex ">Genre</span>
 
         <form className="m-8" onSubmit={handleSubmit(onSubmitHandler)}>
-          <div class="form-group mb-6">
+          <div className="form-group mb-6">
             <input
               type="text"
-              class="form-control block
+              className="form-control block
         w-full
         px-3
         py-1.5
@@ -69,7 +75,7 @@ const GenreForm = () => {
           </div>
 
           <button
-            class="
+            className=" 
       w-full
       px-6
       py-2.5

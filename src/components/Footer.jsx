@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
 function Footer() {
   return (
-    <footer class="bg-slate-800  p-2  footer text-center">
-      <span class="text-sm text-white sm:text-center">
+    <footer className="bg-slate-800  p-2  footer text-center">
+      <span className="text-sm text-white sm:text-center">
         © 2022{" "}
-        <a href="www.movierental.com" class="hover:underline">
+        <Link to={"www.movierental.com"} className="hover:underline">
           movie rental
-        </a>
+        </Link>
         . All Rights Reserved.
       </span>
-      <ul class="space-x-10 text-white">
+      <ul className="space-x-10 text-white">
         <Link to="movie" className="text-sm text-white">
           About
         </Link>

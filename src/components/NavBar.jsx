@@ -1,86 +1,111 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { VideoCameraIcon } from "@heroicons/react/solid";
+import navLogo from "../images/nav-logo.gif";
 function NavBar() {
   return (
-    <nav className="bg-slate-800  p-3 ">
-      <div className="container flex  justify-between items-center mx-auto">
-        <span className="italic flex flex-row  font-semibold  text-white text-2xl movie-logo">
-          <span className=" pr-1">
-            <VideoCameraIcon className="h-8 w-8"></VideoCameraIcon>
-          </span>
-          <span style={{ "font-family": "Niconne", "font-size ": "40px" }}>
-            {" "}
-            <a href="/">Movie Rental</a>
-          </span>
-        </span>
-        <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
-          <NavLink
-            to="/app/movie"
-            className="text-zinc-100 text-lg hover:text-cyan-400"
-            style={({ isActive }) => {
-              return {
-                "font-style": isActive ? "italic" : "",
-              };
-            }}
+    <nav
+      className="
+  relative
+  w-full
+  flex flex-wrap
+  items-center
+  justify-between
+  py-4
+  bg-gray-100
+  text-gray-500
+  hover:text-gray-700
+  focus:text-gray-700
+  shadow-lg
+  navbar navbar-expand-lg navbar-light
+  "
+    >
+      <div className="container-fluid w-full flex flex-wrap items-center justify-between px-6">
+        <button
+          className="
+      navbar-toggler
+      text-gray-500
+      border-0
+      hover:shadow-none hover:no-underline
+      py-2
+      px-2.5
+      bg-transparent
+      focus:outline-none focus:ring-0 focus:shadow-none focus:no-underline
+    "
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            data-prefix="fas"
+            data-icon="bars"
+            className="w-6"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 448 512"
           >
-            Movies
-          </NavLink>
-          <NavLink
-            to="/app/genre"
-            className="text-zinc-100 text-lg hover:text-cyan-400"
-            style={({ isActive }) => {
-              return {
-                "font-style": isActive ? "italic" : "",
-              };
-            }}
+            <path
+              fill="currentColor"
+              d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+            ></path>
+          </svg>
+        </button>
+        <div className="collapse navbar-collapse " id="navbarSupportedContent">
+          <Link
+            className="
+        flex
+        items-center
+        text-gray-900
+        hover:text-gray-900
+        focus:text-gray-900
+        mt-2
+        lg:mt-0
+        mr-1
+      "
+            to={"/"}
           >
-            Genre
-          </NavLink>
-          <NavLink
-            to="/app/rental"
-            className="text-zinc-100 text-lg hover:text-cyan-400"
-            style={({ isActive }) => {
-              return {
-                "font-style": isActive ? "italic" : "",
-              };
-            }}
-          >
-            Rentals
-          </NavLink>
-          <NavLink
-            to="/app/customer"
-            className="text-zinc-100 text-lg hover:text-cyan-400"
-            style={({ isActive }) => {
-              return {
-                "font-style": isActive ? "italic" : "",
-              };
-            }}
-          >
-            Customer
-          </NavLink>
-          <NavLink
-            to="/app/login"
-            className="text-zinc-100 text-lg hover:text-cyan-400"
-            style={({ isActive }) => {
-              return {
-                "font-style": isActive ? "italic" : "",
-              };
-            }}
-          >
-            Login
-          </NavLink>
-          <NavLink
-            to="/app/register"
-            className="text-zinc-100 text-lg hover:text-cyan-400"
-            style={({ isActive }) => {
-              return {
-                "font-style": isActive ? "italic" : "",
-              };
-            }}
-          >
-            Register
-          </NavLink>
-        </ul>
+            <span className="header-font">Movie Rental</span>
+          </Link>
+
+          <ul className="navbar-nav flex flex-col pl-0 list-style-none mr-auto">
+            <li className="nav-item p-2">
+              <Link
+                className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0"
+                to={"/app/genre"}
+              >
+                genres
+              </Link>
+            </li>
+            <li className="nav-item p-2">
+              <Link
+                className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0"
+                to={"/app/movie"}
+              >
+                movies
+              </Link>
+            </li>
+            <li className="nav-item p-2">
+              <Link
+                className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0"
+                to={"/app/customer"}
+              >
+                customers
+              </Link>
+            </li>
+            <li className="nav-item p-2">
+              <Link
+                className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0"
+                to={"/app/rental"}
+              >
+                rental
+              </Link>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
   );

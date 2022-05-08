@@ -1,68 +1,144 @@
-import { getCustomers } from "../services/fakeCustomerService";
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  deleteCustomer,
+  retrieveCustomers,
+} from "../resources/customer/customerSlice";
+import { useEffect } from "react";
 function Customer() {
-  const [Customer, setCustomer] = useState(getCustomers());
-  const deleteCustomer = (id) => {
-    let customer = getCustomers.filter((c) => {
-      return c._id !== id;
-    });
-    setCustomer(customer);
-  };
-  return (
+  let counter = 1;
+  const dispatch = useDispatch();
+  const customers = useSelector((state) => state.customerReducer.customers);
+  useEffect(() => {
+    dispatch(retrieveCustomers());
+  }, []);
+
+  return customers.length === 0 ? (
+    <div className="no-data-container text-center mt-5 bg-slate-50  shadow-2xl p-5">
+      <p>No Customer Avaialbe</p>
+      <p>would you like to add customer?</p>
+      <button className="add-customer-btn mt-5 ">
+        <Link to="/app/customer/new">
+          <svg
+            className="h-8 w-8 text-violet-600   hover:text-lg add-user-svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
+            />
+          </svg>
+        </Link>
+      </button>
+    </div>
+  ) : (
     <div className="container flex flex-col  justify-center genre-container mt-10 bg-slate-50 p-10 shadow-2xl">
-      <table>
-        <tbody>
-          <tr data-aos="zoom-in-left">
-            <th className="header-font">Name</th>
-            <th className="header-font">Phone</th>
-            <th className="header-font">isGold</th>
-          </tr>
-          {Customer.map((c) => (
-            <tr
-              data-aos="zoom-in-left"
-              data-aos-easing="ease-out-cubic"
-              data-aos-duration="2000"
-              className="table-row shadow-md rounded-lg mt-6"
-              key={c._id}
-            >
-              <td className="font-bold">{c.name}</td>
-              <td className="font-bold">{c.phone}</td>
-              <td className="font-bold">{c.isGold.toString()}</td>
-              {console.log(Customer)}
-              <button
-                className="inline-block px-6 py-2.5 bg-gradient-to-r  hover:from-pink-500 hover:to-yellow-500  bg-red-600
-               text-white  rounded-full "
-                onClick={() => {
-                  deleteCustomer(c._id);
-                }}
-              >
-                Delete
-              </button>
-            </tr>
-          ))}
-          <button>
-            <Link to="/app/customer/new">
-              <td>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="red"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </td>
-            </Link>
-          </button>
-        </tbody>
-      </table>
+      {/* table content */}
+      <div className="flex flex-col">
+        <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="py-4 inline-block min-w-full sm:px-6 lg:px-8">
+            <div className="overflow-hidden">
+              <table className="min-w-full text-center">
+                <thead className="border-b bg-gray-800">
+                  <tr>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-white px-6 py-4"
+                    >
+                      #
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-white px-6 py-4"
+                    >
+                      Name
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-white px-6 py-4"
+                    >
+                      Phone
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-white px-6 py-4"
+                    >
+                      isGold
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-white px-6 py-4"
+                    >
+                      Remove
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {customers.map((c) => (
+                    <tr
+                      className="table-row shadow-md rounded-lg mt-6"
+                      key={c._id}
+                    >
+                      <td>{counter++}</td>
+                      <td>
+                        <Link
+                          to={`/app/customer/${c._id}`}
+                          className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
+                        >
+                          {c.name}
+                        </Link>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        {c.phone}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        {c.isGold.toString() == "true" ? "Yes" : "No"}
+                      </td>
+                      <td>
+                        <button
+                          className="inline-block px-6 py-2.5 bg-gradient-to-r  hover:from-pink-500 hover:to-yellow-500  bg-red-600
+             text-white  rounded-full "
+                          onClick={() => {
+                            dispatch(deleteCustomer(c._id));
+                          }}
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                  <tr className="mt-5">
+                    <td>
+                      <button className="add-customer-btn mt-5 ">
+                        <Link to="/app/customer/new">
+                          <svg
+                            className="h-8 w-8 text-violet-600   hover:text-lg add-user-svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
+                            />
+                          </svg>
+                        </Link>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* table content */}
     </div>
   );
 }

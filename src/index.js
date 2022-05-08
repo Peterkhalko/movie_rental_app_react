@@ -13,6 +13,7 @@ import reportWebVitals from "./reportWebVitals";
 import Landing from "./Landing";
 import GenreForm from "./components/Forms/GenreForm";
 import MovieForm from "./components/Forms/MovieForm";
+import RentalForm from "./components/Forms/RentalForm";
 import CustomerForm from "./components/Forms/CustomerForm";
 import { Provider } from "react-redux";
 import { store } from "./store";
@@ -27,8 +28,10 @@ root.render(
           <Route path="/app/movie" element={<Movie />} />
           <Route path="/app/genre" element={<Genre />} />
           <Route path="/app/rental" element={<Rental />} />
+          <Route path="/app/rental/new" element={<RentalForm />} />
           <Route path="/app/customer" element={<Customer />} />
           <Route path="/app/customer/new" element={<CustomerForm />} />
+          <Route path="/app/customer/:customerId" element={<CustomerForm />} />
           <Route path="/app/login" element={<Login />} />
           <Route path="/app/register" element={<Register />} />
           <Route path="/app/genre/new" element={<GenreForm />} />
