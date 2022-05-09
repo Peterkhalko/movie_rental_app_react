@@ -3,13 +3,6 @@ import customerServices from "../../services/customerService";
 const initialState = {
   customers: [],
 };
-export const createCustomer = createAsyncThunk(
-  "customers/create",
-  async ({ name, phone, isGold }) => {
-    const res = await customerServices.create({ name, phone, isGold });
-    return res.data;
-  }
-);
 export const retrieveCustomers = createAsyncThunk(
   "customers/retrieve",
   async () => {
@@ -17,6 +10,15 @@ export const retrieveCustomers = createAsyncThunk(
     return res.data;
   }
 );
+export const createCustomer = createAsyncThunk(
+  "customers/create",
+  async ({ name, phone, isGold }, thunkAPI) => {
+    const token = thunkAPI.getState().loginReducer.token;
+    const res = await customerServices.create({ name, phone, isGold }, token);
+    return res.data;
+  }
+);
+
 export const updateCustomer = createAsyncThunk(
   "customers/update",
   async ({ _id, name, phone, isGold }, thunkAPI) => {
@@ -26,8 +28,10 @@ export const updateCustomer = createAsyncThunk(
 );
 export const deleteCustomer = createAsyncThunk(
   "customers/delete",
-  async (id) => {
-    const res = await customerServices.remove(id);
+  async (id, thunkAPI) => {
+    const token = thunkAPI.getState().loginReducer.token;
+
+    const res = await customerServices.remove(id, token);
     return res.data;
   }
 );

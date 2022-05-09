@@ -1,20 +1,24 @@
 import { useEffect, useState } from "react";
-import { heartIcon } from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { deleteMovie, retrieveMovies } from "../resources/movie/movieSlice";
 import { useDispatch } from "react-redux";
 import Pagination from "./Common/Pagination";
+import { retrievePaginatedMovie } from "../resources/movie/movieSlice";
 function Movie() {
   let counter = 1;
   const dispatch = useDispatch();
-  const movies = useSelector((state) => state.movieReducer.movies);
+  const totalMovieCount = useSelector((state) => state.movieReducer.movies);
+
+  useSelector(() => {});
+  const movies = useSelector((state) => state.movieReducer.paginatedMovieList);
   useEffect(() => {
     dispatch(retrieveMovies());
   }, []);
 
   return movies.length != 0 ? (
     <div className=" mt-10 bg-slate-50 p-10 shadow-2xl">
+      <h1 className="flex flex-row justify-center">Rented Movie</h1>
       {/* table content */}
       <div className="flex flex-col">
         <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">

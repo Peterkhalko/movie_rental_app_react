@@ -5,14 +5,16 @@ const getAll = () => {
 const get = (id) => {
   return axios.get(`/genres/${id}`);
 };
-const create = (data) => {
-  return axios.post("/genres", data);
+const create = (data, token) => {
+  return axios.post("/genres", data, { headers: { "x-auth-token": token } });
 };
-const update = (_id, data) => {
-  return axios.put(`/genres/${_id}`, data);
+const update = (_id, data, token) => {
+  return axios.put(`/genres/${_id}`, data, {
+    headers: { "x-auth-token": token },
+  });
 };
-const remove = (_id) => {
-  return axios.delete(`/genres/${_id}`);
+const remove = (_id, token) => {
+  return axios.delete(`/genres/${_id}`, { headers: { "x-auth-token": token } });
 };
 
 const genreServices = {

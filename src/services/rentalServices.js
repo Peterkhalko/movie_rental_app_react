@@ -5,17 +5,28 @@ const getAll = () => {
 const get = (id) => {
   return axios.get(`/rentals/${id}`);
 };
-const create = (data) => {
-  return axios.post("/rentals", {
-    customer: data.customerId,
-    movie: data.movieId,
+const create = (data, token) => {
+  return axios.post(
+    "/rentals",
+    {
+      customer: data.customerId,
+      movie: data.movieId,
+    },
+    {
+      headers: {
+        "x-auth-token": token,
+      },
+    }
+  );
+};
+const update = (_id, token) => {
+  return axios.patch(`/rentals/${_id}`, { headers: { "x-auth-token": token } });
+};
+const remove = (_id, token) => {
+  console.log("token", token);
+  return axios.delete(`/rentals/${_id}`, {
+    headers: { "x-auth-token": token },
   });
-};
-const update = (_id) => {
-  return axios.patch(`/rentals/${_id}`);
-};
-const remove = (_id) => {
-  return axios.delete(`/rentals/${_id}`);
 };
 
 const rentalServices = {

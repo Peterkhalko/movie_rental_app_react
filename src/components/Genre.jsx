@@ -113,7 +113,6 @@ function Genre() {
         </div>
       </div>
       {/* table content */}
-      <Pagination></Pagination>
     </div>
   );
 }

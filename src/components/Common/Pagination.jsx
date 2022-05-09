@@ -1,37 +1,27 @@
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 const Pagination = (props) => {
-  console.log(props);
+  let pageNo;
+  const pages = Math.ceil(props.count / 5);
+  const li = [];
+  for (pageNo = 1; pageNo <= pages; pageNo++) {
+    li.push(
+      <li className="page-item active" key={pageNo}>
+        <button
+          value={pageNo}
+          className="page-link relative block py-1.5 px-3  border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+          // to={dispatch(retrieveMoviesPagination(pageNo), [dispatch])}
+        >
+          {pageNo}
+        </button>
+      </li>
+    );
+  }
   return (
     <div className="container">
       <div className="flex justify-center">
         <nav aria-label="Page navigation example">
-          <ul className="flex list-style-none">
-            <li className="page-item disabled"></li>
-            <li className="page-item">
-              <a
-                className="page-link text-xl py-3 px-6 relative block border-0 bg-transparent outline-none transition-all duration-300 rounded-md text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                href="#"
-              >
-                1
-              </a>
-            </li>
-            <li className="page-item active">
-              <a
-                className="page-link text-xl py-3 px-6 relative block border-0 bg-blue-600 outline-none transition-all duration-300 rounded-md text-white hover:text-white hover:bg-blue-600 shadow-md focus:shadow-md"
-                href="#"
-              >
-                2 <span className="visually-hidden">(current)</span>
-              </a>
-            </li>
-            <li className="page-item">
-              <a
-                className="page-link text-xl py-3 px-6 relative block border-0 bg-transparent outline-none transition-all duration-300 rounded-md text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                href="#"
-              >
-                3
-              </a>
-            </li>
-            <li className="page-item"></li>
-          </ul>
+          <ul className="flex list-style-none">{li}</ul>
         </nav>
       </div>
     </div>

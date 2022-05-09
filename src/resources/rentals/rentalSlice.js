@@ -10,20 +10,29 @@ export const retrieveRentals = createAsyncThunk("retals/retrieve", async () => {
 });
 export const createRentals = createAsyncThunk(
   "rentals/create",
-  async (data) => {
-    const res = await rentalServices.create(data);
+  async (data, thunkAPI) => {
+    const token = thunkAPI.getState().loginReducer.token;
+    const res = await rentalServices.create(data, token);
     return res.data;
   }
 );
 
-export const updateRentals = createAsyncThunk("genres/update", async (_id) => {
-  const res = await rentalServices.update(_id);
-  return res.data;
-});
-export const deleteRentals = createAsyncThunk("rentals/delete", async (id) => {
-  const res = await rentalServices.remove(id);
-  return res.data;
-});
+export const updateRentals = createAsyncThunk(
+  "genres/update",
+  async (_id, thunkAPI) => {
+    const token = thunkAPI.getState().loginReducer.token;
+    const res = await rentalServices.update(_id, token);
+    return res.data;
+  }
+);
+export const deleteRentals = createAsyncThunk(
+  "rentals/delete",
+  async (id, thunkAPI) => {
+    const token = thunkAPI.getState().loginReducer.token;
+    const res = await rentalServices.remove(id, token);
+    return res.data;
+  }
+);
 
 export const rentalSlice = createSlice({
   name: "rentals",

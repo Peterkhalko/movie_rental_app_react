@@ -8,19 +8,35 @@ export const retrieveGenres = createAsyncThunk("genres/retrieve", async () => {
   const res = await genreServices.getAll();
   return res.data;
 });
-export const createGenre = createAsyncThunk("genres/create", async (genre) => {
-  const res = await genreServices.create({ name: genre.name });
-  return res.data;
-});
+export const createGenre = createAsyncThunk(
+  "genres/create",
+  async (genre, thunkAPI) => {
+    const token = thunkAPI.getState().loginReducer.token;
+    const res = await genreServices.create({ name: genre.name }, token);
+    return res.data;
+  }
+);
 
-export const updateGenre = createAsyncThunk("genres/update", async (data) => {
-  const res = await genreServices.update(data._id, { name: data.name });
-  return res.data;
-});
-export const deleteGenre = createAsyncThunk("genres/delete", async (id) => {
-  const res = await genreServices.remove(id);
-  return res.data;
-});
+export const updateGenre = createAsyncThunk(
+  "genres/update",
+  async (data, thunkAPI) => {
+    const token = thunkAPI.getState().loginReducer.token;
+    const res = await genreServices.update(
+      data._id,
+      { name: data.name },
+      token
+    );
+    return res.data;
+  }
+);
+export const deleteGenre = createAsyncThunk(
+  "genres/delete",
+  async (_id, thunkAPI) => {
+    const token = thunkAPI.getState().loginReducer.token;
+    const res = await genreServices.remove(_id, token);
+    return res.data;
+  }
+);
 
 export const genreSlice = createSlice({
   name: "genres",
@@ -32,11 +48,7 @@ export const genreSlice = createSlice({
     [retrieveGenres.fulfilled]: (state, action) => {
       state.genres = [...action.payload];
     },
-    // [updateGenre.fulfilled]: (state, action) => {
-    //   const index = state.genres.findIndex(
-    //     (genre) => genre._id === action.payload.id
-    //   );
-    // },
+
     [deleteGenre.fulfilled]: (state, action) => {
       let index = state.genres.findIndex(
         (genre) => genre._id === action.payload._id

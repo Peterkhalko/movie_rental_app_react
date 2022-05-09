@@ -5,14 +5,16 @@ const getAll = () => {
 const get = (id) => {
   return axios.get(`/customers/${id}`);
 };
-const create = (data) => {
-  return axios.post("/customers", data);
+const create = (data, token) => {
+  return axios.post("/customers", data, { headers: { "x-auth-token": token } });
 };
-const update = (id, data, token) => {
+const update = (id, data) => {
   return axios.put(`/customers/${id}`, data);
 };
 const remove = (id, token) => {
-  return axios.delete(`/customers/${id}`);
+  return axios.delete(`/customers/${id}`, {
+    headers: { "x-auth-token": token },
+  });
 };
 
 const customerService = {

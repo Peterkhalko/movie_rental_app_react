@@ -1,8 +1,13 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
-import LandingPage from "./components/LandingPage";
+import { loadLogin } from "./resources/login/loginSlice";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loadLogin());
+  }, []);
   return (
     <div>
       <NavBar />

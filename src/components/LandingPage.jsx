@@ -62,7 +62,7 @@ function LandingPage() {
       <div className="container-fluid flex flex-row mt-10 ">
         <span className="">
           <video
-            src={wonderWomanAquaMan}
+            src={spiderman}
             autoPlay
             loop
             muted
