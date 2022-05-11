@@ -6,7 +6,7 @@ import { retrieveGenres } from "../../resources/genre/genreSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { createMovie } from "../../resources/movie/movieSlice";
 import { useNavigate } from "react-router-dom";
-
+import MovieGenreNotSelected from "../alerts/MovieGenreNotSelected";
 const schema = yup.object().shape({
   title: yup.string().min(3).max(10).required(),
   genreId: yup.string().min(2).max(24).required(),
@@ -32,7 +32,9 @@ const MovieForm = () => {
 
   const onSubmitHandler = (data) => {
     if (data.genreId == "genre") {
-      alert("Please select valid genre");
+      {
+        alert("Please select valid genre ");
+      }
     } else {
       console.log(data);
       dispatch(createMovie(data));

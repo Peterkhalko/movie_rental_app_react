@@ -35,13 +35,13 @@ function LandingPage() {
                 <span className="mt-10 flex flex-row space-x-10">
                   <button
                     type="button"
-                    class="inline-block font-bold px-6 py-2.5 bg-purple-600 text-white  text-xs leading-tight uppercase rounded-full shadow-md hover:bg-purple-700 hover:shadow-lg hover:text-white focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
+                    class=" drop-shadow-2xl inline-block  px-6 py-2.5 bg-purple-600 text-white  text-lg leading-tight uppercase rounded-full  hover:bg-purple-700 hover:shadow-lg hover:text-white focus:bg-purple-700  active:bg-purple-800  transition duration-150 ease-in-out"
                   >
                     <Link to="/app/login"> Login</Link>
                   </button>
                   <button
                     type="button"
-                    class="inline-block px-6 py-2.5 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
+                    class=" drop-shadow-2xl inline-block  px-6 py-2.5 bg-purple-600 text-white  text-lg leading-tight uppercase rounded-full  hover:bg-purple-700 hover:shadow-lg hover:text-white focus:bg-purple-700  active:bg-purple-800  transition duration-150 ease-in-out"
                   >
                     <Link to="/app/login"> SingUp</Link>
                   </button>
@@ -59,26 +59,63 @@ function LandingPage() {
         </div>
       </div>
 
-      <div className="container-fluid flex flex-row mt-10 ">
-        <span className="">
+      <div className="container-fluid flex flex-row p-8 mt-10 ">
+        <span className="" data-aos="fade-down-right">
           <video
             src={spiderman}
             autoPlay
             loop
             muted
-            className="flex-1 object-cover" // Is supposed to shrink or expand the video the length of the parent div
+            className="flex-1 object-cover rounded-full"
           >
             Your browser does not support the video tag.
           </video>
         </span>
 
-        <span className="mt-3  text-gray-500 text-lg grid content-center text-justify">
-          <p>
+        <span
+          className="mt-3  text-gray-500 text-lg text-center self-center "
+          data-aos="fade-down-left"
+        >
+          <p className="self-center  ">
             Now you can rent and watch <br /> right from the comfort of you home
             — Personalization,Discover more of what you love —
           </p>
         </span>
       </div>
+      {/* swiper */}
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+          </div>
+          <div class="swiper-slide">
+            <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+          </div>
+          <div class="swiper-slide">
+            <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+          </div>
+          <div class="swiper-slide">
+            <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+          </div>
+          <div class="swiper-slide">
+            <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+          </div>
+          <div class="swiper-slide">
+            <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+          </div>
+          <div class="swiper-slide">
+            <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+          </div>
+          <div class="swiper-slide">
+            <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+          </div>
+          <div class="swiper-slide">
+            <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+      {/* swiper */}
     </div>
   );
 }

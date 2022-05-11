@@ -2,8 +2,13 @@ import axios from "../axios-common";
 const getAll = () => {
   return axios.get("/movies");
 };
+const getMovieCount = (genreName) => {
+  const res = axios.get("/movies/count/movies/?genreName=" + genreName);
+  return res;
+};
 const pfs = (data) => {
-  return axios.post("/movies/pfs", { skip: data.skip });
+  const res = axios.post("/movies/pfs", data);
+  return res;
 };
 const get = (id) => {
   return axios.get(`/movies/${id}`);
@@ -37,5 +42,6 @@ const movieServices = {
   update,
   remove,
   pfs,
+  getMovieCount,
 };
 export default movieServices;

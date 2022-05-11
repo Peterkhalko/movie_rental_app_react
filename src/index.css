@@ -128,15 +128,31 @@ add-user-svg:after {
   transform-origin: 50%;
   z-index: -1;
 }
-/* add-user-svg:hover {
-  .add-user-svg:before,
-  .add-user-svg:after {
-    border-color: transparent;
-    filter: blur(2px);
-    transform: scale(4);
-    transition: 1000ms transform ease, 2100ms blur ease, 900ms border-color ease;
-  }
-  &:after {
-    transition-delay: 100ms;
-  }
-} */
+/* swiper */
+
+.swiper-container {
+  background: #eee;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+.swiper {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 300px;
+  height: 300px;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+}
+/* swiper */
