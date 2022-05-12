@@ -25,8 +25,11 @@ function Movie() {
     dispatch(retrievePaginatedMovie({ genre }));
     dispatch(retrieveGenres());
   };
-  let searchFunction = () => {
-    console.log("in the search function");
+  let searchFunction = (title) => {
+    dispatch(retrievePaginatedMovie({ title }));
+    console.log("current movie", movies);
+
+    console.log("movies", movies);
   };
   let paginationProps = { totalMoviesCount, paginate };
   let filterProps = { genres, filterFunction, searchFunction };
