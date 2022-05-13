@@ -1,4 +1,4 @@
-import axios from "../axios-common";
+import axios from "../axios/axios-common";
 const getAll = () => {
   return axios.get("/customers");
 };

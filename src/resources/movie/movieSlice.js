@@ -8,13 +8,6 @@ export const retrieveMovies = createAsyncThunk("movies/retrieve", async () => {
   const res = await movieServices.getAll();
   return res.data;
 });
-export const retrieveMoviesCount = createAsyncThunk(
-  "movies/retrieveMoviesCount",
-  async (genreName) => {
-    const res = await movieServices.getMovieCount(genreName);
-    return res.data;
-  }
-);
 
 export const createMovie = createAsyncThunk(
   "movie/create",
@@ -38,6 +31,13 @@ export const deleteMovie = createAsyncThunk(
   async (_id, thunkAPI) => {
     const token = thunkAPI.getState().loginReducer.token;
     const res = await movieServices.remove(_id, token);
+    return res.data;
+  }
+);
+export const retrieveMoviesCount = createAsyncThunk(
+  "movies/retrieveMoviesCount",
+  async (genreName) => {
+    const res = await movieServices.getMovieCount(genreName);
     return res.data;
   }
 );
@@ -74,7 +74,6 @@ export const movieSlice = createSlice({
       state.movie.splice(index, 1, action.payload);
     },
     [deleteMovie.fulfilled]: (state, action) => {
-      console.log("before splice state.movies", action.payload);
       let index = state.movies.findIndex(
         (movie) => movie._id === action.payload._id
       );

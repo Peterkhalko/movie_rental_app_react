@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import { VideoCameraIcon } from "@heroicons/react/solid";
-import navLogo from "../images/nav-logo.gif";
+
 function NavBar() {
   return (
     <nav

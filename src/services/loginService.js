@@ -1,4 +1,4 @@
-import axios from "../axios-common";
+import axios from "../axios/axios-common";
 
 const login = (data) => {
   return axios.post("/login", data);

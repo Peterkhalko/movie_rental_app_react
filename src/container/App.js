@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import NavBar from "./components/NavBar";
-import { loadLogin } from "./resources/login/loginSlice";
+import NavBar from "../components/Common/NavBar";
+import { loadLogin } from "../resources/login/loginSlice";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 function App() {

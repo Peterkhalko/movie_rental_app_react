@@ -18,7 +18,11 @@ const Search = (props) => {
             className=" btn px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800  transition duration-150 ease-in-out flex items-center"
             type="button"
             id="button-addon2"
-            disabled
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+            onClick={() => {
+              props.search(document.getElementById("input-search").value);
+            }}
           >
             <svg
               aria-hidden="true"

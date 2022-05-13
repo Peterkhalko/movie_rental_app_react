@@ -1,22 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./index.css";
-import App from "./App";
-import Customer from "./components/Customer";
-import Genre from "./components/Genre";
-import Login from "./components/Login";
-import Movie from "./components/Movie";
-import Register from "./components/Register";
-import Rental from "./components/Rental";
-import reportWebVitals from "./reportWebVitals";
-import Landing from "./Landing";
+import "./style/index.css";
+import App from "./container/App";
+import Customer from "./pages/Customer";
+import Genre from "./pages/Genre";
+import Login from "./pages/Login";
+import Movie from "./pages/Movie";
+import Register from "./pages/Register";
+import Rental from "./pages/Rental";
+import reportWebVitals from "./report/reportWebVitals";
+import Landing from "./container/Landing";
 import GenreForm from "./components/Forms/GenreForm";
 import MovieForm from "./components/Forms/MovieForm";
 import RentalForm from "./components/Forms/RentalForm";
 import CustomerForm from "./components/Forms/CustomerForm";
 import { Provider } from "react-redux";
-import { store } from "./store";
+import { store } from "./store/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

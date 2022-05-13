@@ -1,26 +1,16 @@
 import { Link } from "react-router-dom";
-import heroLanding from "../images/nav-logo.gif";
-import spiderman from "../videos/spider-man.mp4";
-import wonderWomanAquaMan from "../videos/wonderWomanAquaMan.mp4";
+import heroLanding from "../assets/images/nav-logo.gif";
+import spiderman from "../assets/videos/spider-man.mp4";
+import wonderWomanAquaMan from "../assets/videos/wonderWomanAquaMan.mp4";
 function LandingPage() {
   return (
-    <div>
-      <div className="relative bg-white overflow-hidden">
+    <div className="commong-bg-color">
+      <div className="relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
-            <svg
-              className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2"
-              fill="currentColor"
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-            >
-              <polygon points="50,0 100,0 50,100 0,100" />
-            </svg>
-
-            <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+          <div className="relative z-10 pb-8  sm:pb-16 md:pb-20 lg:max-w-xl ">
+            <main className=" text-white common-bg-color mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
               <div className="sm:text-center lg:text-left">
-                <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+                <h1 className="text-4xl tracking-tight font-extrabold  sm:text-5xl md:text-6xl">
                   <span className="block xl:inline">
                     <span style={{ fontFamily: "Niconne" }}>
                       {" "}
@@ -28,7 +18,7 @@ function LandingPage() {
                     </span>
                   </span>
                 </h1>
-                <p className="mt-3  text-gray-500 text-lg ">
+                <p className="mt-3  text-white text-lg ">
                   A new home of thousands of movies, including all the latest
                   blockbusters
                 </p>
@@ -43,16 +33,16 @@ function LandingPage() {
                     type="button"
                     class=" drop-shadow-2xl inline-block  px-6 py-2.5 bg-purple-600 text-white  text-lg leading-tight uppercase rounded-full  hover:bg-purple-700 hover:shadow-lg hover:text-white focus:bg-purple-700  active:bg-purple-800  transition duration-150 ease-in-out"
                   >
-                    <Link to="/app/login"> SingUp</Link>
+                    <Link to="/app/register"> SingUp</Link>
                   </button>
                 </span>
               </div>
             </main>
           </div>
         </div>
-        <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+        <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 mt-5 ">
           <img
-            className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
+            className="object-cover sm:h-72 md:h-96 lg:w-full lg:h-full rounded-full"
             src={heroLanding}
             alt=""
           />

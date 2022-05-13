@@ -76,7 +76,7 @@ const Login = () => {
               id="password"
               placeholder="password"
               {...register("password")}
-            />
+            ></input>
             <p className="text-red-900">{errors.password?.message}</p>
           </div>
 
