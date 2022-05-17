@@ -1,56 +1,72 @@
 import { Link } from "react-router-dom";
 import heroLanding from "../assets/images/nav-logo.gif";
+import heroChair from "../assets/svg/first.svg";
 import spiderman from "../assets/videos/spider-man.mp4";
 import wonderWomanAquaMan from "../assets/videos/wonderWomanAquaMan.mp4";
 function LandingPage() {
   return (
-    <div className="commong-bg-color">
-      <div className="relative overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <div className="relative z-10 pb-8  sm:pb-16 md:pb-20 lg:max-w-xl ">
-            <main className=" text-white common-bg-color mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-              <div className="sm:text-center lg:text-left">
-                <h1 className="text-4xl tracking-tight font-extrabold  sm:text-5xl md:text-6xl">
-                  <span className="block xl:inline">
-                    <span style={{ fontFamily: "Niconne" }}>
-                      {" "}
-                      Welcome to the Movie Rentals
-                    </span>
-                  </span>
-                </h1>
-                <p className="mt-3  text-white text-lg ">
-                  A new home of thousands of movies, including all the latest
-                  blockbusters
-                </p>
-                <span className="mt-10 flex flex-row space-x-10">
-                  <button
-                    type="button"
-                    class=" drop-shadow-2xl inline-block  px-6 py-2.5 bg-purple-600 text-white  text-lg leading-tight uppercase rounded-full  hover:bg-purple-700 hover:shadow-lg hover:text-white focus:bg-purple-700  active:bg-purple-800  transition duration-150 ease-in-out"
-                  >
-                    <Link to="/app/login"> Login</Link>
-                  </button>
-                  <button
-                    type="button"
-                    class=" drop-shadow-2xl inline-block  px-6 py-2.5 bg-purple-600 text-white  text-lg leading-tight uppercase rounded-full  hover:bg-purple-700 hover:shadow-lg hover:text-white focus:bg-purple-700  active:bg-purple-800  transition duration-150 ease-in-out"
-                  >
-                    <Link to="/app/register"> SingUp</Link>
-                  </button>
-                </span>
-              </div>
-            </main>
-          </div>
+    <div className="commong-bg-color text-white">
+      <div className="flex flex-col lg:flex-row justify-center">
+        <div className="self-center  text-center">
+          <h1 className="text-4xl tracking-tight font-extrabold  sm:text-5xl md:text-6xl">
+            <span className="block ">
+              <span style={{ fontFamily: "Niconne" }}>
+                {" "}
+                Welcome to the Movie Rentals
+              </span>
+            </span>
+          </h1>
+          <p className="mt-3 text-lg ">
+            A new home of thousands of movies, including all the latest
+            blockbusters
+          </p>
+          <span className="mt-10 flex flex-row space-x-10 justify-center">
+            <button
+              type="button"
+              className=" drop-shadow-2xl inline-block  px-6 py-2.5 bg-purple-600 text-white  text-lg leading-tight uppercase rounded-full  hover:bg-purple-700 hover:shadow-lg hover:text-white focus:bg-purple-700  active:bg-purple-800  transition duration-150 ease-in-out"
+            >
+              <Link to="/app/login"> Login</Link>
+            </button>
+            <button
+              type="button"
+              className=" drop-shadow-2xl inline-block  px-6 py-2.5 bg-purple-600 text-white  text-lg leading-tight uppercase rounded-full  hover:bg-purple-700 hover:shadow-lg hover:text-white focus:bg-purple-700  active:bg-purple-800  transition duration-150 ease-in-out"
+            >
+              <Link to="/app/register"> SingUp</Link>
+            </button>
+          </span>
         </div>
-        <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 mt-5 ">
-          <img
-            className="object-cover sm:h-72 md:h-96 lg:w-full lg:h-full rounded-full"
-            src={heroLanding}
-            alt=""
-          />
+
+        <div className="hero-movie-chair">
+          <img className="hero-movie-chair" src={heroChair} alt="movie chair" />
         </div>
       </div>
+      <div className="havent-rented  flex flex-row justify-center m-10  space-x-16">
+        <p className="self-center flex flex-row  space-x-5">
+          <span> Haven't Rented Out Movie Yet? Start Renting </span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-arrow-right"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+            />
+          </svg>
+        </p>
 
-      <div className="container-fluid flex flex-row p-8 mt-10 ">
-        <span className="" data-aos="fade-down-right">
+        <button
+          type="button"
+          className=" drop-shadow-2xl inline-block  px-6 py-2.5 bg-purple-600 text-white  text-lg leading-tight uppercase rounded-full  hover:bg-purple-700 hover:shadow-lg hover:text-white focus:bg-purple-700  active:bg-purple-800  transition duration-150 ease-in-out"
+        >
+          <Link to="/app/rental"> Rent Out</Link>
+        </button>
+      </div>
+      <div className="container-fluid flex flex-col md:flex-row xl:flex-row lg:flex-row p-8 mt-10 ">
+        <span className="" data-aos="fade-down">
           <video
             src={spiderman}
             autoPlay
@@ -63,12 +79,18 @@ function LandingPage() {
         </span>
 
         <span
-          className="mt-3  text-gray-500 text-lg text-center self-center "
-          data-aos="fade-down-left"
+          className="text-white text-lg text-center self-center "
+          data-aos="fade-down"
         >
           <p className="self-center  ">
-            Now you can rent and watch <br /> right from the comfort of you home
-            — Personalization,Discover more of what you love —
+            Now you can start renting — Personalized movie at a go! — <br />
+            lets start renting
+            <button
+              type="button"
+              className=" drop-shadow-2xl inline-block  px-6 py-2.5 bg-purple-600 text-white  text-lg leading-tight uppercase rounded-full  hover:bg-purple-700 hover:shadow-lg hover:text-white focus:bg-purple-700  active:bg-purple-800  transition duration-150 ease-in-out"
+            >
+              <Link to="/app/login"> Login</Link>
+            </button>
           </p>
         </span>
       </div>

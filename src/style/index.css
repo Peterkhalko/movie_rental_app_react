@@ -1,23 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.genre-container {
-  text-align: center;
-}
+
 .table-row {
   border: 5px solid transparent;
 }
 #app {
   height: 100%;
 }
-html,
-body {
-  position: relative;
-  height: 100%;
-}
 
 body {
-  background: #eee;
+  /* background: #eee; */
+  background-color: #0e1924;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 14px;
   color: #000;
@@ -59,7 +53,7 @@ body {
   border: 1px solid black;
 }
 .b2 {
-  border: 1px solid black;
+  border: 1px solid white;
 }
 .landing-hero {
   position: relative;
@@ -69,4 +63,32 @@ body {
 }
 .common-bg-color {
   background-color: #0e1924;
+}
+.not-logged-in-page {
+  background-image: url("../assets/svg/bg.png");
+  background: linear-gradient(rgba(14, 25, 36, 1), rgba(188, 154, 154, 0.5));
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.hero-movie-chair {
+  -webkit-animation: spin 4s linear infinite;
+  -moz-animation: spin 4s linear infinite;
+  animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+  25% {
+    transform: rotate(2deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+
+  75% {
+    transform: rotate(-2deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }

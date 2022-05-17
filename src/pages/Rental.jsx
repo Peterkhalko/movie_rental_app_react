@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+import NotLoggedIn from "../components/Common/NotLoggedIn";
 import {
   deleteRentals,
   retrieveRentals,
@@ -13,11 +14,12 @@ function Rentals() {
   useEffect(() => {
     dispatch(retrieveRentals());
   }, []);
-  return rentals.length != 0 ? (
-    <div className="flex flex-col  justify-end genre-container mt-10 bg-slate-50  shadow-2xl p-5">
-      <h1 className="underline">Rented Products</h1>
-      {/* table content */}
-      <div className="flex flex-col">
+  const permit = useSelector((state) => state.loginReducer.token);
+  return !permit ? (
+    <NotLoggedIn></NotLoggedIn>
+  ) : rentals.length != 0 ? (
+    <div className="flex flex-col  justify-end  mt-10 bg-slate-50  shadow-2xl p-5">
+      <div className=" bg-slate-50 p-10 shadow-2xl">
         <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="py-4 inline-block min-w-full sm:px-6 lg:px-8">
             <div className="overflow-hidden">

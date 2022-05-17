@@ -71,35 +71,23 @@ function NavBar() {
           </Link>
 
           <ul className="navbar-nav flex flex-col pl-0 list-style-none mr-auto">
-            <li className="nav-item p-2">
-              <Link
-                className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0"
-                to={"/app/genre"}
-              >
+            <li className="nav-item p-2 active:text-3xl">
+              <Link className={`nav-link text-gray-500 `} to={"/app/genre"}>
                 genres
               </Link>
             </li>
             <li className="nav-item p-2">
-              <Link
-                className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0"
-                to={"/app/movie"}
-              >
+              <Link className="nav-link text-gray-500 " to={"/app/movie"}>
                 movies
               </Link>
             </li>
             <li className="nav-item p-2">
-              <Link
-                className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0"
-                to={"/app/customer"}
-              >
+              <Link className="nav-link text-gray-500 " to={"/app/customer"}>
                 customers
               </Link>
             </li>
             <li className="nav-item p-2">
-              <Link
-                className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0"
-                to={"/app/rental"}
-              >
+              <Link className="nav-link text-gray-500" to={"/app/rental"}>
                 rental
               </Link>
             </li>

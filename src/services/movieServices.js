@@ -2,8 +2,8 @@ import axios from "../axios/axios-common";
 const getAll = () => {
   return axios.get("/movies");
 };
-const getMovieCount = (genreName) => {
-  const res = axios.get("/movies/count/movies/?genreName=" + genreName);
+const getMovieCount = (data) => {
+  const res = axios.get("/movies/count/movies/?genreName=" + data);
   return res;
 };
 const pfs = (data) => {

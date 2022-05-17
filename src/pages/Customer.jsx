@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import NotLoggedIn from "../components/Common/NotLoggedIn";
 import {
   deleteCustomer,
   retrieveCustomers,
@@ -13,7 +14,10 @@ function Customer() {
     dispatch(retrieveCustomers());
   }, []);
 
-  return customers.length === 0 ? (
+  const permit = useSelector((state) => state.loginReducer.token);
+  return !permit ? (
+    <NotLoggedIn></NotLoggedIn>
+  ) : customers.length === 0 ? (
     <div className="no-data-container text-center mt-5 bg-slate-50  shadow-2xl p-5">
       <p>No Customer Avaialbe</p>
       <p>would you like to add customer?</p>
@@ -36,9 +40,9 @@ function Customer() {
       </button>
     </div>
   ) : (
-    <div className="container flex flex-col  justify-center genre-container mt-10 bg-slate-50 p-10 shadow-2xl">
+    <div className="flex flex-col  justify-end  mt-10 bg-slate-50  shadow-2xl p-5">
       {/* table content */}
-      <div className="flex flex-col">
+      <div className=" bg-slate-50 p-10 shadow-2xl">
         <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="py-4 inline-block min-w-full sm:px-6 lg:px-8">
             <div className="overflow-hidden">

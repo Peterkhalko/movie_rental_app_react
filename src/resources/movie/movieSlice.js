@@ -36,8 +36,8 @@ export const deleteMovie = createAsyncThunk(
 );
 export const retrieveMoviesCount = createAsyncThunk(
   "movies/retrieveMoviesCount",
-  async (genreName) => {
-    const res = await movieServices.getMovieCount(genreName);
+  async (data) => {
+    const res = await movieServices.getMovieCount(data);
     return res.data;
   }
 );

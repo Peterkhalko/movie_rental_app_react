@@ -2,16 +2,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { deleteGenre, retrieveGenres } from "../resources/genre/genreSlice";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import Pagination from "../components/Common/Pagination";
+import NotLoggedIn from "../components/Common/NotLoggedIn";
 function Genre() {
   const genres = useSelector((state) => state.genreReducer.genres);
-  //console.log(genres); genre being called multiple time on adding data
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(retrieveGenres());
   }, []);
   let counter = 1;
-  return genres.length === 0 ? (
+  const permit = useSelector((state) => state.loginReducer.token);
+  return !permit ? (
+    <NotLoggedIn></NotLoggedIn>
+  ) : genres.length === 0 ? (
     <div className="no-data-container text-center mt-5 bg-slate-50  shadow-2xl p-5">
       <p>No Genre Avaialbe</p>
       <p>would you like to add Genre?</p>
@@ -35,9 +37,9 @@ function Genre() {
     </div>
   ) : (
     <div className="flex flex-col  justify-end genre-container mt-10 bg-slate-50  shadow-2xl p-5">
-      <h1 className="underline">Genres</h1>
+      {/* <h1 className="underline">Genres</h1> */}
       {/* table content */}
-      <div className="flex flex-col">
+      <div className=" bg-slate-50 p-10 shadow-2xl">
         <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="py-4 inline-block min-w-full sm:px-6 lg:px-8">
             <div className="overflow-hidden">

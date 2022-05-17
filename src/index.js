@@ -15,10 +15,10 @@ import GenreForm from "./components/Forms/GenreForm";
 import MovieForm from "./components/Forms/MovieForm";
 import RentalForm from "./components/Forms/RentalForm";
 import CustomerForm from "./components/Forms/CustomerForm";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import { store } from "./store/store";
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
   <Provider store={store}>
     <Router>
@@ -43,5 +43,5 @@ root.render(
     </Router>
   </Provider>
 );
-
+export default Router;
 reportWebVitals();

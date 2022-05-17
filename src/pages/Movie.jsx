@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Sort from "../components/Common/Sort";
+import NotLoggedIn from "../components/Common/NotLoggedIn";
 import {
   deleteMovie,
   retrieveMoviesCount,
@@ -18,11 +19,17 @@ function Movie() {
   const movies = useSelector((state) => state.movieReducer.movies);
   const genres = useSelector((state) => state.genreReducer.genres);
   const [currentGenre, setCurrentGenre] = useState("all genre");
+  const [currentTitle, setCurrentTitle] = useState("");
 
   const paginate = (pageNo) => {
     const skipValue = 5 * (pageNo - 1);
-    console.log("current genre on paginate", currentGenre);
-    dispatch(retrievePaginatedMovie({ skip: skipValue, genre: currentGenre }));
+    dispatch(
+      retrievePaginatedMovie({
+        skip: skipValue,
+        genre: currentGenre,
+        currentTitle,
+      })
+    );
   };
   const filterFunction = (genre) => {
     setCurrentGenre(genre);
@@ -32,6 +39,8 @@ function Movie() {
   };
   let searchFunction = (title) => {
     dispatch(retrievePaginatedMovie({ title }));
+    dispatch(retrieveMoviesCount(`titleSearch${title}`));
+    setCurrentTitle(title);
   };
   let sortFunction = (sort, itemToSort) => {
     dispatch(retrievePaginatedMovie({ sort, itemToSort }));
@@ -50,10 +59,13 @@ function Movie() {
     dispatch(retrieveGenres());
   }, []);
 
-  return movies.length != 0 ? (
-    <div className="container-fluid">
+  const permit = useSelector((state) => state.loginReducer.token);
+  return !permit ? (
+    <NotLoggedIn></NotLoggedIn>
+  ) : movies.length != 0 ? (
+    <div className="flex flex-col  justify-end  mt-10 bg-slate-50  shadow-2xl p-5">
       <div className=" bg-slate-50 p-10 shadow-2xl">
-        <h1 className="flex flex-row justify-center">Rented Movie</h1>
+        {/* <h1 className="flex flex-row justify-center">Rented Movie</h1> */}
         {/* offCanvas */}
 
         <div className="flex space-x-2">
