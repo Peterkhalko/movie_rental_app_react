@@ -16,18 +16,22 @@ function Movie() {
   let counter = 1;
   const dispatch = useDispatch();
   const totalMoviesCount = useSelector((state) => state.movieReducer.count);
-  const movies = useSelector((state) => state.movieReducer.movies);
+  let movies = useSelector((state) => state.movieReducer.movies);
   const genres = useSelector((state) => state.genreReducer.genres);
   const [currentGenre, setCurrentGenre] = useState("all genre");
-  const [currentTitle, setCurrentTitle] = useState("");
+  const [currentItemToSort, setcurrentItemToSort] = useState("");
+  const [sortBy, setSortBy] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const paginate = (pageNo) => {
+    setCurrentPage(pageNo);
     const skipValue = 5 * (pageNo - 1);
     dispatch(
       retrievePaginatedMovie({
         skip: skipValue,
         genre: currentGenre,
-        currentTitle,
+        currentItemToSort,
+        sortBy,
       })
     );
   };
@@ -40,10 +44,12 @@ function Movie() {
   let searchFunction = (title) => {
     dispatch(retrievePaginatedMovie({ title }));
     dispatch(retrieveMoviesCount(`titleSearch${title}`));
-    setCurrentTitle(title);
+    setcurrentItemToSort(title);
   };
   let sortFunction = (sort, itemToSort) => {
     dispatch(retrievePaginatedMovie({ sort, itemToSort }));
+    setcurrentItemToSort(itemToSort);
+    setSortBy(sort);
   };
   let paginationProps = { totalMoviesCount, paginate };
   let filterProps = { genres, filterFunction, searchFunction };
@@ -146,6 +152,8 @@ function Movie() {
                         scope="col"
                         className="text-sm font-medium text-white px-6 py-4"
                       >
+                        {" "}
+                        <Sort porp1={sortProps} prop2={"numberInStocks"}></Sort>
                         in stocks
                       </th>
                       <th
@@ -153,6 +161,10 @@ function Movie() {
                         className="text-sm font-medium text-white px-6 py-4"
                       >
                         Daily Rental
+                        <Sort
+                          porp1={sortProps}
+                          prop2={"dailyRentalRate"}
+                        ></Sort>
                       </th>
                       <th
                         scope="col"
