@@ -28,7 +28,7 @@ export const registerSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(createRegister.fulfilled, (state, action) => {
       // if (action.payload.error) {
-      //   console.log("Recived duplicate entry");
+
       // } else {
       //   state.user = action.payload;
       // }.

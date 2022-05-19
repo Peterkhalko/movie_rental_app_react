@@ -47,7 +47,7 @@ export const customerSlice = createSlice({
       return { customers: [...action.payload] };
     },
     // [updateCustomer.fulfilled]: (state, action) => {
-    //   console.log(state.customers);
+    //
     //   const index = state.customers.findIndex(
     //     (customer) => customer._id === action.payload.id
     //   );

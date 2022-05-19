@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import heroLanding from "../assets/images/nav-logo.gif";
+
 import heroChair from "../assets/svg/first.svg";
 import spiderman from "../assets/videos/spider-man.mp4";
-import wonderWomanAquaMan from "../assets/videos/wonderWomanAquaMan.mp4";
+
 function LandingPage() {
   return (
     <div className="commong-bg-color text-white">
@@ -48,11 +48,11 @@ function LandingPage() {
             width="16"
             height="16"
             fill="currentColor"
-            class="bi bi-arrow-right"
+            className="bi bi-arrow-right"
             viewBox="0 0 16 16"
           >
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
             />
           </svg>
@@ -95,37 +95,37 @@ function LandingPage() {
         </span>
       </div>
       {/* swiper */}
-      <div class="swiper mySwiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
+      <div className="swiper mySwiper">
+        <div className="swiper-wrapper">
+          <div className="swiper-slide">
             <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
           </div>
-          <div class="swiper-slide">
+          <div className="swiper-slide">
             <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
           </div>
-          <div class="swiper-slide">
+          <div className="swiper-slide">
             <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
           </div>
-          <div class="swiper-slide">
+          <div className="swiper-slide">
             <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
           </div>
-          <div class="swiper-slide">
+          <div className="swiper-slide">
             <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
           </div>
-          <div class="swiper-slide">
+          <div className="swiper-slide">
             <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
           </div>
-          <div class="swiper-slide">
+          <div className="swiper-slide">
             <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
           </div>
-          <div class="swiper-slide">
+          <div className="swiper-slide">
             <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
           </div>
-          <div class="swiper-slide">
+          <div className="swiper-slide">
             <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
           </div>
         </div>
-        <div class="swiper-pagination"></div>
+        <div className="swiper-pagination"></div>
       </div>
       {/* swiper */}
     </div>

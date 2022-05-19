@@ -26,7 +26,7 @@ const Login = () => {
     navigate("/app/genre");
   };
   return (
-    <div className="register-container flex justify-center m-2">
+    <div className="register-container flex justify-center m-10">
       <div className="block p-6 rounded-lg shadow-lg bg-white max-w-md ">
         <span className="flex flex-row justify-center">
           Let's Start Exploring Together

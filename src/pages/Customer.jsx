@@ -24,10 +24,10 @@ function Customer() {
       <button className="add-customer-btn mt-5 ">
         <Link to="/app/customer/new">
           <svg
-            className="h-8 w-8 text-violet-600   hover:text-lg add-user-svg"
+            className="h-8 w-8    hover:text-lg add-user-svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke="currentColor"
+            stroke="red"
           >
             <path
               strokeLinecap="round"
@@ -120,10 +120,10 @@ function Customer() {
                       <button className="add-customer-btn mt-5 ">
                         <Link to="/app/customer/new">
                           <svg
-                            className="h-8 w-8 text-violet-600   hover:text-lg add-user-svg"
+                            className="h-8 w-8   hover:text-lg add-user-svg"
                             fill="none"
                             viewBox="0 0 24 24"
-                            stroke="currentColor"
+                            stroke="red"
                           >
                             <path
                               strokeLinecap="round"

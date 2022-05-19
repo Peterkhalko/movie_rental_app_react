@@ -23,7 +23,6 @@ const update = (_id, token) => {
   return axios.patch(`/rentals/${_id}`, { headers: { "x-auth-token": token } });
 };
 const remove = (_id, token) => {
-  console.log("token", token);
   return axios.delete(`/rentals/${_id}`, {
     headers: { "x-auth-token": token },
   });

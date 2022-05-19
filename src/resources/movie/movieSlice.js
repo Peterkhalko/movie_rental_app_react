@@ -4,10 +4,13 @@ const initialState = {
   movies: [],
   count: "",
 };
-export const retrieveMovies = createAsyncThunk("movies/retrieve", async () => {
-  const res = await movieServices.getAll();
-  return res.data;
-});
+export const retrieveMovies = createAsyncThunk(
+  "movies/retrieveMovies",
+  async () => {
+    const res = await movieServices.getAll();
+    return res.data;
+  }
+);
 
 export const createMovie = createAsyncThunk(
   "movie/create",
@@ -42,7 +45,7 @@ export const retrieveMoviesCount = createAsyncThunk(
   }
 );
 export const retrievePaginatedMovie = createAsyncThunk(
-  "movies/retrieve",
+  "movies/retrievePaginatedMovie",
   async (data) => {
     const res = await movieServices.pfs(data);
     return res.data;
@@ -56,14 +59,22 @@ export const movieSlice = createSlice({
       state.movies.push(action.payload);
     },
     [retrieveMovies.fulfilled]: (state, action) => {
-      state.movies.push([...action.payload]);
+      state.movies = [];
+      state.movies = action.payload;
     },
     [retrievePaginatedMovie.fulfilled]: (state, action) => {
       state.movies = [];
-      state.movies.push(action.payload);
+      state.movies = action.payload;
     },
     [retrieveMoviesCount.fulfilled]: (state, action) => {
       state.count = action.payload.count;
+    },
+    [deleteMovie.fulfilled]: (state, action) => {
+      let index = state.movies.findIndex(
+        (movie) => movie._id === action.payload._id
+      );
+
+      state.movies.splice(index, 1);
     },
 
     [updateMovie.fulfilled]: (state, action) => {
@@ -72,12 +83,6 @@ export const movieSlice = createSlice({
       );
 
       state.movie.splice(index, 1, action.payload);
-    },
-    [deleteMovie.fulfilled]: (state, action) => {
-      let index = state.movies.findIndex(
-        (movie) => movie._id === action.payload._id
-      );
-      state.movies.splice(index, 1);
     },
   },
 });

@@ -16,6 +16,10 @@ export const loginSlice = createSlice({
     loadLogin: (state) => {
       state.token = sessionStorage.getItem("token");
     },
+    loadLogout: (state) => {
+      state.token = sessionStorage.setItem("token", "");
+      state.token = sessionStorage.getItem("token");
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(userLogin.fulfilled, (state, action) => {
@@ -25,5 +29,5 @@ export const loginSlice = createSlice({
 });
 
 export const { reducer } = loginSlice;
-export const { loadLogin } = loginSlice.actions;
+export const { loadLogin, loadLogout } = loginSlice.actions;
 export default reducer;

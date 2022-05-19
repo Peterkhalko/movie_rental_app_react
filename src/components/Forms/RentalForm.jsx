@@ -12,7 +12,7 @@ const schema = yup.object().shape({
   customerId: yup.string().required(),
   movieId: yup.string().required(),
 });
-const GenreForm = () => {
+const RentalForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -141,4 +141,4 @@ const GenreForm = () => {
   );
 };
 
-export default GenreForm;
+export default RentalForm;

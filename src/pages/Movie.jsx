@@ -20,8 +20,13 @@ function Movie() {
   const genres = useSelector((state) => state.genreReducer.genres);
   const [currentGenre, setCurrentGenre] = useState("all genre");
   const [currentItemToSort, setcurrentItemToSort] = useState("");
+  let [checkAvailibility, setAvailiblilty] = useState(0);
   const [sortBy, setSortBy] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
+  console.log("movies", movies);
+  // if (movies.length > 0) {
+  //   console.log("setAvailaility", checkAvailibility);
+  // }
 
   const paginate = (pageNo) => {
     setCurrentPage(pageNo);
@@ -50,7 +55,23 @@ function Movie() {
     dispatch(retrievePaginatedMovie({ sort, itemToSort }));
     setcurrentItemToSort(itemToSort);
     setSortBy(sort);
+    dispatch(retrieveMoviesCount("all genre"));
   };
+  let deleteFunction = (_id) => {
+    dispatch(deleteMovie(_id));
+    console.log("current Genre", currentGenre);
+    if (movies.length <= 1) {
+      dispatch(retrievePaginatedMovie());
+      setCurrentGenre("all genre");
+      dispatch(retrieveMoviesCount(currentGenre));
+    }
+    if (currentGenre === "all genre") {
+      dispatch(retrieveMoviesCount("all genre"));
+    }
+    dispatch(retrieveMoviesCount(currentGenre));
+    setCurrentGenre("all genre");
+  };
+
   let paginationProps = { totalMoviesCount, paginate };
   let filterProps = { genres, filterFunction, searchFunction };
   let sortProps = {
@@ -69,7 +90,7 @@ function Movie() {
   return !permit ? (
     <NotLoggedIn></NotLoggedIn>
   ) : movies.length != 0 ? (
-    <div className="flex flex-col  justify-end  mt-10 bg-slate-50  shadow-2xl p-5">
+    <div className="flex flex-col  justify-end  mt-10 bg-slate-50  shadow-2xl">
       <div className=" bg-slate-50 p-10 shadow-2xl">
         {/* <h1 className="flex flex-row justify-center">Rented Movie</h1> */}
         {/* offCanvas */}
@@ -125,6 +146,9 @@ function Movie() {
           </div>
         </div>
         {/* offCanvas */}
+        {/* toolTip */}
+
+        {/* toolTip */}
         {/* table content */}
         <div className="flex flex-col">
           <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -135,74 +159,68 @@ function Movie() {
                     <tr>
                       <th
                         scope="col"
-                        className="text-sm font-medium text-white px-6 py-4 "
+                        className="text-sm font-bold text-white py-6"
                       >
-                        #<span></span>
+                        #
                       </th>
-                      <th
-                        scope="col"
-                        className="text-sm font-medium text-white px-6 py-4 flex flex-row justify-center space-x-1"
-                      >
-                        <span className="flex flex-col justify-center">
-                          Title
+                      <th scope="col" className="text-sm font-bold text-white ">
+                        <span className="flex  flex-row justify-center space-x-2">
+                          <span className="self-center">Title</span>
+                          <span>
+                            {" "}
+                            <Sort porp1={sortProps} prop2={"title"}></Sort>
+                          </span>
                         </span>
-                        <Sort porp1={sortProps} prop2={"title"}></Sort>
                       </th>
-                      <th
-                        scope="col"
-                        className="text-sm font-medium text-white px-6 py-4"
-                      >
-                        {" "}
-                        <Sort porp1={sortProps} prop2={"numberInStocks"}></Sort>
-                        in stocks
+                      <th scope="col" className="text-sm font-bold text-white ">
+                        <span className="flex  flex-row justify-center space-x-2">
+                          <span className="self-center">Genre</span>
+                          <span>
+                            {" "}
+                            <Sort porp1={sortProps} prop2={"genre.name"}></Sort>
+                          </span>
+                        </span>
                       </th>
-                      <th
-                        scope="col"
-                        className="text-sm font-medium text-white px-6 py-4"
-                      >
-                        Daily Rental
-                        <Sort
-                          porp1={sortProps}
-                          prop2={"dailyRentalRate"}
-                        ></Sort>
+                      <th scope="col" className="text-sm font-bold text-white ">
+                        <span className="flex  flex-row justify-center space-x-2">
+                          <span className="self-center">In Stocks</span>
+                          <span>
+                            {" "}
+                            <Sort
+                              porp1={sortProps}
+                              prop2={"numberInStocks"}
+                            ></Sort>
+                          </span>
+                        </span>
                       </th>
-                      <th
-                        scope="col"
-                        className="text-sm font-medium text-white px-6 py-4"
-                      >
-                        Liked
+                      <th scope="col" className="text-sm font-bold text-white ">
+                        <span className="flex  flex-row justify-center space-x-2">
+                          <span className="self-center">Rate/-</span>
+                          <span>
+                            {" "}
+                            <Sort
+                              porp1={sortProps}
+                              prop2={"dailyRentalRate"}
+                            ></Sort>
+                          </span>
+                        </span>
                       </th>
-                      <th
-                        scope="col"
-                        className="text-sm font-medium text-white px-6 py-4 flex flex-row justify-center"
-                      >
-                        Title
-                        <span className="flex flex-col">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="14"
-                            height="14"
-                            fill="white"
-                            className="bi bi-caret-up"
-                          >
-                            <path d="M3.204 11h9.592L8 5.519 3.204 11zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659z" />
-                          </svg>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            fill="currentColor"
-                            className="bi bi-caret-down"
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
-                          </svg>
+
+                      <th scope="col" className="text-sm font-bold text-white ">
+                        <span className="flex  flex-row justify-center space-x-2">
+                          <span className="self-center">Liked</span>
+                        </span>
+                      </th>
+
+                      <th scope="col" className="text-sm font-bold text-white ">
+                        <span className="flex  flex-row justify-center space-x-2">
+                          <span className="self-center">Action</span>
                         </span>
                       </th>
                     </tr>
                   </thead>
                   <tbody>
-                    {movies[0].map((m) => (
+                    {movies.map((m) => (
                       <tr
                         className="table-row shadow-md rounded-lg mt-6"
                         key={m._id}
@@ -210,6 +228,9 @@ function Movie() {
                         <td>{counter++}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                           {m.title}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          {m.genre.name}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                           {m.numberInStocks}
@@ -244,11 +265,20 @@ function Movie() {
                             className="inline-block px-6 py-2.5 bg-gradient-to-r  hover:from-pink-500 hover:to-yellow-500  bg-red-600
                  text-white  rounded-full "
                             onClick={() => {
-                              dispatch(deleteMovie(m._id));
+                              deleteFunction(m._id);
                             }}
                           >
                             Delete
                           </button>
+                          {/* <button
+                            className="inline-block px-6 py-2.5 bg-gradient-to-r  hover:from-pink-500 hover:to-yellow-500  bg-red-600
+                 text-white  rounded-full "
+                            onClick={() => {
+                              dispatch(deleteMovie(m._id));
+                            }}
+                          >
+                            Delete
+                          </button> */}
                         </td>
                       </tr>
                     ))}

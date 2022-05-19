@@ -43,5 +43,6 @@ root.render(
     </Router>
   </Provider>
 );
+
 export default Router;
 reportWebVitals();

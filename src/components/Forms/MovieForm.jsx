@@ -36,7 +36,6 @@ const MovieForm = () => {
         alert("Please select valid genre ");
       }
     } else {
-      console.log(data);
       dispatch(createMovie(data));
       navigate("/app/movie");
     }

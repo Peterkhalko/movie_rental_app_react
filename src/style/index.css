@@ -9,6 +9,19 @@
   height: 100%;
 }
 
+.nav-item-active {
+  font-style: italic;
+}
+.logoutFixed {
+  position: fixed;
+  right: 10px;
+  top: 26px;
+  left: auto;
+  z-index: 1030;
+}
+.pageLink-item-active {
+  font-style: italic;
+}
 body {
   /* background: #eee; */
   background-color: #0e1924;

@@ -5,6 +5,7 @@ import {
   retrieveRentals,
   updateRentals,
 } from "../resources/rentals/rentalSlice";
+import { retrieveMovies } from "../resources/movie/movieSlice";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 function Rentals() {
@@ -13,6 +14,7 @@ function Rentals() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(retrieveRentals());
+    dispatch(retrieveMovies());
   }, []);
   const permit = useSelector((state) => state.loginReducer.token);
   return !permit ? (
@@ -119,15 +121,15 @@ function Rentals() {
                     </tr>
                   ))}
 
-                  <tr className="bg-white border-b">
+                  <tr className=" border-b">
                     <td>
                       <button className="mt-5 ">
                         <Link to="/app/rental/new">
                           <svg
-                            className="h-8 w-8 text-violet-600 rounded-ful"
+                            className="h-8 w-8  rounded-ful"
                             viewBox="0 0 24 24"
                             fill="none"
-                            stroke="currentColor"
+                            stroke="red"
                             strokeWidth="2"
                             strokeLinecap="round"
                             strokeLinejoin="round"
@@ -156,10 +158,10 @@ function Rentals() {
       <button className="add-customer-btn mt-5 ">
         <Link to="/app/rental/new">
           <svg
-            className="h-8 w-8 text-violet-600 rounded-ful"
+            className="h-8 w-8  rounded-ful"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="currentColor"
+            stroke="red"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
