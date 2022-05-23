@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Sort from "../components/Common/Sort";
 import NotLoggedIn from "../components/Common/NotLoggedIn";
+import Error from "../components/Common/Error";
 import {
   deleteMovie,
   retrieveMoviesCount,
@@ -17,16 +18,12 @@ function Movie() {
   const dispatch = useDispatch();
   const totalMoviesCount = useSelector((state) => state.movieReducer.count);
   let movies = useSelector((state) => state.movieReducer.movies);
+  let error = useSelector((state) => state.movieReducer.error);
   const genres = useSelector((state) => state.genreReducer.genres);
   const [currentGenre, setCurrentGenre] = useState("all genre");
   const [currentItemToSort, setcurrentItemToSort] = useState("");
-  let [checkAvailibility, setAvailiblilty] = useState(0);
   const [sortBy, setSortBy] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  console.log("movies", movies);
-  // if (movies.length > 0) {
-  //   console.log("setAvailaility", checkAvailibility);
-  // }
 
   const paginate = (pageNo) => {
     setCurrentPage(pageNo);
@@ -49,7 +46,7 @@ function Movie() {
   let searchFunction = (title) => {
     dispatch(retrievePaginatedMovie({ title }));
     dispatch(retrieveMoviesCount(`titleSearch${title}`));
-    setcurrentItemToSort(title);
+    setcurrentItemToSort(`titleSearch${title}`);
   };
   let sortFunction = (sort, itemToSort) => {
     dispatch(retrievePaginatedMovie({ sort, itemToSort }));
@@ -59,7 +56,6 @@ function Movie() {
   };
   let deleteFunction = (_id) => {
     dispatch(deleteMovie(_id));
-    console.log("current Genre", currentGenre);
     if (movies.length <= 1) {
       dispatch(retrievePaginatedMovie());
       setCurrentGenre("all genre");
@@ -89,10 +85,11 @@ function Movie() {
   const permit = useSelector((state) => state.loginReducer.token);
   return !permit ? (
     <NotLoggedIn></NotLoggedIn>
-  ) : movies.length != 0 ? (
+  ) : error ? (
+    <Error></Error>
+  ) : (
     <div className="flex flex-col  justify-end  mt-10 bg-slate-50  shadow-2xl">
       <div className=" bg-slate-50 p-10 shadow-2xl">
-        {/* <h1 className="flex flex-row justify-center">Rented Movie</h1> */}
         {/* offCanvas */}
 
         <div className="flex space-x-2">
@@ -146,9 +143,7 @@ function Movie() {
           </div>
         </div>
         {/* offCanvas */}
-        {/* toolTip */}
 
-        {/* toolTip */}
         {/* table content */}
         <div className="flex flex-col">
           <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -219,6 +214,7 @@ function Movie() {
                       </th>
                     </tr>
                   </thead>
+
                   <tbody>
                     {movies.map((m) => (
                       <tr
@@ -314,28 +310,6 @@ function Movie() {
         {/* table content */}
         <Pagination {...paginationProps}></Pagination>
       </div>
-    </div>
-  ) : (
-    <div className="no-data-container text-center mt-5 bg-slate-50  shadow-2xl p-5">
-      <p>No Movies Avaialbe</p>
-      <p>would you like to add movie?</p>
-      <button className="add-customer-btn mt-5 ">
-        <Link to="/app/movie/new">
-          <svg
-            className="h-8 w-8 text-violet-600   hover:text-lg add-user-svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
-            />
-          </svg>
-        </Link>
-      </button>
     </div>
   );
 }

@@ -3,6 +3,7 @@ import movieServices from "../../services/movieServices";
 const initialState = {
   movies: [],
   count: "",
+  error: "",
 };
 export const retrieveMovies = createAsyncThunk(
   "movies/retrieveMovies",
@@ -58,13 +59,19 @@ export const movieSlice = createSlice({
     [createMovie.fulfilled]: (state, action) => {
       state.movies.push(action.payload);
     },
+    [createMovie.rejected]: (state, action) => {
+      state.error = "Something failed";
+    },
+
     [retrieveMovies.fulfilled]: (state, action) => {
       state.movies = [];
       state.movies = action.payload;
+      state.error = "";
     },
     [retrievePaginatedMovie.fulfilled]: (state, action) => {
       state.movies = [];
       state.movies = action.payload;
+      state.error = "";
     },
     [retrieveMoviesCount.fulfilled]: (state, action) => {
       state.count = action.payload.count;
@@ -75,6 +82,9 @@ export const movieSlice = createSlice({
       );
 
       state.movies.splice(index, 1);
+    },
+    [deleteMovie.rejected]: (state, action) => {
+      state.error = "something failed";
     },
 
     [updateMovie.fulfilled]: (state, action) => {

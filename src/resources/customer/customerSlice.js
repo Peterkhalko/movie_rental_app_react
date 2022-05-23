@@ -22,7 +22,12 @@ export const createCustomer = createAsyncThunk(
 export const updateCustomer = createAsyncThunk(
   "customers/update",
   async ({ _id, name, phone, isGold }, thunkAPI) => {
-    const res = await customerServices.update(_id, { name, phone, isGold });
+    const token = thunkAPI.getState().loginReducer.token;
+    const res = await customerServices.update(
+      _id,
+      { name, phone, isGold },
+      token
+    );
     return res.data;
   }
 );
