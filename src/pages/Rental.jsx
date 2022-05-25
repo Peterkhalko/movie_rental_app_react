@@ -8,6 +8,7 @@ import {
 import { retrieveMovies } from "../resources/movie/movieSlice";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+
 function Rentals() {
   let counter = 1;
   const rentals = useSelector((state) => state.rentalReducer.rentals);
@@ -101,13 +102,26 @@ function Rentals() {
                         {r.dateIn ? r.dateIn.slice(0, 10) : "NA"}
                       </td>
                       <td>
-                        <button
-                          className="inline-block px-6 py-2.5 bg-gradient-to-r  hover:from-pink-500 hover:to-yellow-500 p-2  bg-red-600
+                        {r.dateIn ? (
+                          <button
+                            className=" cursor-not-allowed inline-block px-6 py-2.5 bg-gradient-to-r  hover:from-pink-500 hover:to-yellow-500 p-2  bg-red-600
                text-white  rounded-full "
-                          onClick={() => dispatch(updateRentals(r._id))}
-                        >
-                          Return
-                        </button>
+                            disabled
+                            onClick={() => dispatch(updateRentals(r._id))}
+                          >
+                            Returned
+                          </button>
+                        ) : (
+                          <button
+                            className=" inline-block px-6 py-2.5 bg-gradient-to-r  hover:from-pink-500 hover:to-yellow-500 p-2  bg-red-600
+               text-white  rounded-full "
+                            onClick={() => {
+                              dispatch(updateRentals(r._id));
+                            }}
+                          >
+                            Return
+                          </button>
+                        )}
                       </td>
                       <td>
                         <button
