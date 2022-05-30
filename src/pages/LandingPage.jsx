@@ -95,7 +95,7 @@ function LandingPage() {
         </span>
       </div>
       {/* swiper */}
-      <div className="swiper mySwiper">
+      {/* <div className="swiper mySwiper">
         <div className="swiper-wrapper">
           <div className="swiper-slide">
             <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
@@ -126,7 +126,7 @@ function LandingPage() {
           </div>
         </div>
         <div className="swiper-pagination"></div>
-      </div>
+      </div> */}
       {/* swiper */}
     </div>
   );
